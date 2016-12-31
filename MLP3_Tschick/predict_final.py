@@ -27,13 +27,13 @@ from sklearn.pipeline import make_pipeline
 # mriToHistFeature in src.fMRIToFeature to your importing function and it will work
 '''bins = 64
 block = 8
-testDir = 'data/set_test/'
-trainDir = 'data/set_train/'
+testDir = './data/set_test/'
+trainDir = './data/set_train/'
 
 featureTest = mriToHistFeature(testDir, bins, block)
-csvOutput('src/testFeatureHistR.csv', featureTest)
+csvOutput('./src/testFeatureHistR.csv', featureTest)
 featureTrain = mriToHistFeature(trainDir, bins, block)
-csvOutput('src/trainFeatureHistR.csv', featureTrain)'''
+csvOutput('./src/trainFeatureHistR.csv', featureTrain)'''
 
 #Here we start the logistic regression.
 
@@ -46,21 +46,18 @@ Y = trainingTargets
 Z = testingFeatures
 
 hamloss = make_scorer(hamming_loss, greater_is_better=False)
-<<<<<<< HEAD
+
 classif = OneVsRestClassifier(LogisticRegressionCV(Cs=10, fit_intercept=True, cv=10, penalty='l2', scoring=hamloss)) #solver='newton-cg'
-=======
-classif = OneVsRestClassifier(LogisticRegressionCV(Cs=100, fit_intercept=True, cv=10, penalty='l2' , scoring=hamloss)) #solver='newton-cg'
->>>>>>> origin/master
 
 pipe = make_pipeline(StandardScaler(), classif)
 pipe.fit(X, Y)
 
-anss = pipe.predict(Z)
-csvMLP3FormatedOutput('final_sub.csv', anss)
+# anss = pipe.predict(Z)
+# csvMLP3FormatedOutput('final_sub.csv', anss)
 
-# # ada
-# nClf = trainingTargets.shape[1]
-# nBoost = 600
-# boostEps, boostAlp, boostModel = adaMultiOutBoost(pipe2, nBoost, trainingFeatures, trainingTargets)
-# adaPredicted = adaBoostMultiPredict(boostModel, boostAlp, nBoost, testingFeatures, nClf)
-# csvMLP3FormatedOutput('../OvRAdaLogHistR600.csv', adaPredicted)
+# ada
+nClf = trainingTargets.shape[1]
+nBoost = 600
+boostEps, boostAlp, boostModel = adaMultiOutBoost(pipe, nBoost, trainingFeatures, trainingTargets)
+adaPredicted = adaBoostMultiPredict(boostModel, boostAlp, nBoost, testingFeatures, nClf)
+csvMLP3FormatedOutput('../OvRAdaLogHistR600.csv', adaPredicted)
