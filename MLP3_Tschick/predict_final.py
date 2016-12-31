@@ -46,7 +46,7 @@ Y = trainingTargets
 Z = testingFeatures
 
 hamloss = make_scorer(hamming_loss, greater_is_better=False)
-classif = OneVsRestClassifier(LogisticRegressionCV(Cs=10, fit_intercept=True, cv=10, penalty='l2' , scoring=hamloss)) #solver='newton-cg'
+classif = OneVsRestClassifier(LogisticRegressionCV(Cs=100, fit_intercept=True, cv=10, penalty='l2' , scoring=hamloss)) #solver='newton-cg'
 
 pipe = make_pipeline(StandardScaler(), classif)
 pipe.fit(X,Y)
