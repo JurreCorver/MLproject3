@@ -46,10 +46,17 @@ Y = trainingTargets
 Z = testingFeatures
 
 hamloss = make_scorer(hamming_loss, greater_is_better=False)
-classif = OneVsRestClassifier(LogisticRegressionCV(Cs=10, fit_intercept=True, cv=10, penalty='l2' , scoring=hamloss)) #solver='newton-cg'
+classif = OneVsRestClassifier(LogisticRegressionCV(Cs=10, fit_intercept=True, cv=10, penalty='l2', scoring=hamloss)) #solver='newton-cg'
 
 pipe = make_pipeline(StandardScaler(), classif)
-pipe.fit(X,Y)
+pipe.fit(X, Y)
 
 anss = pipe.predict(Z)
-csvFormatedOutput('final_sub.csv', anss)
+csvMLP3FormatedOutput('final_sub.csv', anss)
+
+# # ada
+# nClf = trainingTargets.shape[1]
+# nBoost = 600
+# boostEps, boostAlp, boostModel = adaMultiOutBoost(pipe2, nBoost, trainingFeatures, trainingTargets)
+# adaPredicted = adaBoostMultiPredict(boostModel, boostAlp, nBoost, testingFeatures, nClf)
+# csvMLP3FormatedOutput('../OvRAdaLogHistR600.csv', adaPredicted)
