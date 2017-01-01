@@ -10,7 +10,7 @@ import zipfile
 from shutil import rmtree
 
 PROJECT = 'MLP3'
-FINAL_SUB_LENGTH = 139
+FINAL_SUB_LENGTH = 415
 MIN_DESCRIPTION_LENGTH = 50
 ERROR = 0
 
@@ -120,7 +120,7 @@ if found['final_sub.csv'] == 1:
 		print( "ERROR: Invalid number of rows in final_sub.csv, "+str(FINAL_SUB_LENGTH)+" rows required: 1 header row plus "+str(FINAL_SUB_LENGTH-1)+" id/prediction paris")
 		ERROR += 1
 
-	if len(finalSub[0].split(",")) != 2:
+	if len(finalSub[0].split(",")) != 4:
 		print( "ERROR: Invalid number of columns in final_sub.csv, 2 columns required: ID and Prediction")
 		ERROR += 1
 
