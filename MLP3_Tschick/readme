@@ -27,8 +27,10 @@ Model
 oneVsRestclassifer,logistic regression classifier,10foldcrossvalidation
 
 Description
-((i) feature extraction
-Using the nibabel/NIfTI tools to read the intensity of fMRI image, and take each 3D fMRI as a data point. Blocklizing each fMRI by 0 to 3 levels. It means that we blocklize the 3D fMRI to 8*8*8 blocks by dichotimizing along the 3 axis for 3 times. According to the intensity of each block, we proposed to compute the histogram features with 64 bins for each block. In total there are (1 + 8 + 8*8 + 8*8*8)*64 (in total is 37440) features extracted for each training and testing fMRI.
+(i) feature extraction
+Using the nibabel/NIfTI tools to read the intensity of fMRI image, and take each 3D fMRI as a data point. Blocklizing each fMRI by 0 to 3 levels. It means that we blocklize the 3D fMRI to 8*8*8 blocks by dichotimizing along the 3 axis for 3 times. 
+
+According to the intensity of each block, we proposed to compute the histogram features with 64 bins for each block. In total there are (1 + 8 + 8*8 + 8*8*8)*64 (in total is 37440) features extracted for each training and testing fMRI.
 
 (ii) multiclassification model
 Base model: using the logistic regression based classifer as the base classifer of oneVsRestclassifer from sklearn package. The logistc regression classifer applies 10 fold cross validation. 
